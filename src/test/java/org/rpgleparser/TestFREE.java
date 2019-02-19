@@ -401,7 +401,7 @@ public class TestFREE {
                 "       DCL-DS *N;\r\n"
                         + "       END-DS;";
         expectTokensForFreeSnippet(inputString,
-                "DCL-DS", "*", "N", ";", "END-DS", ";");
+                "DCL-DS", "*N", ";", "END-DS", ";");
     }
 
     @Test
@@ -411,7 +411,7 @@ public class TestFREE {
                         + "         ABDTFL ZONED(7);\r\n"
                         + "         ABDTFL ZONED(7);\r\n" + "       END-DS;";
         expectTokensForFreeSnippet(inputString,
-                "DCL-DS", "*", "N", ";", "ABDTFL", "ZONED",
+                "DCL-DS", "*N", ";", "ABDTFL", "ZONED",
                 "(", "7", ")", ";", "ABDTFL", "ZONED", "(", "7", ")", ";",
                 "END-DS", ";");
     }
@@ -504,7 +504,7 @@ public class TestFREE {
         String inputString =
                 " DCL-DS *N;\r\n" + "END-DS;";
         expectTokensForFreeSnippet(inputString,
-                "DCL-DS", "*", "N", ";", "END-DS", ";");
+                "DCL-DS", "*N", ";", "END-DS", ";");
     }
 
     @Test
@@ -523,8 +523,8 @@ public class TestFREE {
 
     @Test
     public void testMultiply2() {
-        String inputString = " 1*N;";
-        expectTokensForFreeSnippet(inputString, "1", "*", "N", ";");
+        String inputString = " 1*M;";
+        expectTokensForFreeSnippet(inputString, "1", "*", "M", ";");
     }
 
     @Test

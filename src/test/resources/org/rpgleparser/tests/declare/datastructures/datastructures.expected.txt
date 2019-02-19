@@ -49,8 +49,7 @@ FREE_SEMI                <;>
 HIDDEN:COMMENTS          <  //>
 HIDDEN:COMMENTS_TEXT     <Unnamed data structure>
 DS_DataStructureStart    <DCL-DS>
-MULT_NOSPACE             <*>
-ID                       <N>
+SPLAT_N                  <*N>
 FREE_SEMI                <;>
 ID                       <item>
 VARCHAR                  <VARCHAR>
@@ -111,7 +110,7 @@ FREE_SEMI                <;>
   (statement
     (dcl_ds
       DCL-DS
-      (identifier (free_identifier * (idOrKeyword N)))
+      (identifier (all (symbolicConstants *N)))
       ;
       (dcl_ds_field
         (identifier (free_identifier (idOrKeyword item)))

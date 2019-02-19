@@ -20,8 +20,7 @@ KEYWORD_OPTIONS          <OPTIONS>
 ID                       <*STRING>
 ')'                      <)>
 FREE_SEMI                <;>
-MULT_NOSPACE             <*>
-ID                       <N>
+SPLAT_N                  <*N>
 POINTER                  <POINTER>
 KEYWORD_VALUE            <Value>
 KEYWORD_OPTIONS          <OPTIONS>
@@ -31,8 +30,7 @@ COLON                    <:>
 ID                       <*NOPASS>
 ')'                      <)>
 FREE_SEMI                <;>
-MULT_NOSPACE             <*>
-ID                       <N>
+SPLAT_N                  <*N>
 POINTER                  <POINTER>
 KEYWORD_VALUE            <Value>
 KEYWORD_OPTIONS          <OPTIONS>
@@ -71,7 +69,7 @@ FREE_SEMI                <;>
       ;
     )
     (dcl_pr_field
-      (identifier (free_identifier * (idOrKeyword N)))
+      (identifier (all (symbolicConstants *N)))
       (datatype (datatypeName POINTER))
       (keyword (keyword_value Value))
       (keyword
@@ -87,7 +85,7 @@ FREE_SEMI                <;>
       ;
     )
     (dcl_pr_field
-      (identifier (free_identifier * (idOrKeyword N)))
+      (identifier (all (symbolicConstants *N)))
       (datatype (datatypeName POINTER))
       (keyword (keyword_value Value))
       (keyword

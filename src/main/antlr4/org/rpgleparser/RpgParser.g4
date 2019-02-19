@@ -244,15 +244,15 @@ dcl_pr:  (DS_PrototypeStart identifier datatype? keyword* FREE_SEMI?
 	| (prBegin
 	  parm_fixed*
 	);
-dcl_pr_field: DS_Parm? (identifier (datatype | like=keyword_like) keyword* FREE_SEMI );
+dcl_pr_field: DS_Parm? (identifier keyword_const? (datatype | like=keyword_like) keyword* FREE_SEMI );
 end_dcl_pr: DS_PrototypeEnd;
-dcl_pi:  (DS_ProcedureInterfaceStart identifier datatype? keyword* FREE_SEMI?  
+dcl_pi:  (DS_ProcedureInterfaceStart (identifier |SPLAT_N) datatype? keyword* FREE_SEMI?  
 	dcl_pi_field*
 	end_dcl_pi FREE_SEMI)
 	| (piBegin
 		pi_parm_fixed*
 	);
-dcl_pi_field: DS_Parm? identifier (datatype | like=keyword_like) keyword* FREE_SEMI;
+dcl_pi_field: DS_Parm? identifier keyword_const? (datatype | like=keyword_like) keyword* FREE_SEMI;
 end_dcl_pi: DS_ProcedureInterfaceEnd;
 dcl_c:  (DS_Constant name=identifier (keyword_const | literal | SPLAT_ON | SPLAT_OFF | SPLAT_ZEROS | SPLAT_BLANKS)? FREE_SEMI) 
     | (
@@ -829,7 +829,7 @@ beginProcedure: psBegin | freeBeginProcedure;
 endProcedure: psEnd | freeEndProcedure;
 
 psBegin: PS_FIXED ps_name PS_BEGIN PS_KEYWORDS;
-freeBeginProcedure:DS_ProcedureStart identifier FREE_SEMI;
+freeBeginProcedure:DS_ProcedureStart identifier (KEYWORD_EXPORT | KEYWORD_SERIALIZE)? FREE_SEMI;
  
 psEnd: PS_FIXED ps_name PS_END PS_KEYWORDS;
 freeEndProcedure:DS_ProcedureEnd  identifier? FREE_SEMI;
@@ -2588,4 +2588,5 @@ SPLAT_ALL
    | SPLAT_Y
    | SPLAT_YEARS
    | SPLAT_EXTDESC
+   | SPLAT_N
    ;
