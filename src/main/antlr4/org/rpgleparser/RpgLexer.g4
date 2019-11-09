@@ -810,6 +810,7 @@ PS_BEGIN: [bB] {getCharPositionInLine()==24}?;
 PS_END: [eE] {getCharPositionInLine()==24}?;
 PS_RESERVED2: '                   ' {getCharPositionInLine()==43}? -> skip;
 PS_KEYWORDS : ~[\r\n] {getCharPositionInLine()==44}? (~[\r\n] {getCharPositionInLine()<=80}?)*;
+PS_FIXEDCONT : [pP] {getCharPositionInLine()==6}?;
 PS_WS80 : [ ] {getCharPositionInLine()>80}? [ ]* NEWLINE -> skip; 
 PS_COMMENTS80: FREE_COMMENTS80-> channel(HIDDEN),popMode;
 PS_Any: -> popMode,skip;

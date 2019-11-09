@@ -825,10 +825,15 @@ dcl_pi?
 statements=subprocedurestatement*
 endProcedure;
 
-beginProcedure: psBegin | freeBeginProcedure;
+beginProcedure: psBegin psContLine*| freeBeginProcedure;
 endProcedure: psEnd | freeEndProcedure;
 
-psBegin: PS_FIXED ps_name PS_BEGIN PS_KEYWORDS;
+psBegin: PS_FIXED ps_name PS_BEGIN PS_KEYWORDS ;
+
+psContLine:
+PS_FIXED PS_NAME (PS_KEYWORDS | ID)
+;
+
 freeBeginProcedure:DS_ProcedureStart identifier (KEYWORD_EXPORT | KEYWORD_SERIALIZE)? FREE_SEMI;
  
 psEnd: PS_FIXED ps_name PS_END PS_KEYWORDS;
