@@ -34,6 +34,7 @@ statement:
 	| blank_line 
 	| directive 
 	| free
+	| piBegin
 ;
 
 endSource: endSourceHead endSourceLine*;
@@ -250,8 +251,7 @@ dcl_pi:  (DS_ProcedureInterfaceStart (identifier |SPLAT_N) datatype? keyword* FR
 	dcl_pi_field*
 	end_dcl_pi FREE_SEMI)
 	| (piBegin
-		pi_parm_fixed*
-	);
+	pi_parm_fixed*);
 dcl_pi_field: DS_Parm? identifier keyword_const? (datatype | like=keyword_like) keyword* FREE_SEMI;
 end_dcl_pi: DS_ProcedureInterfaceEnd;
 dcl_c:  (DS_Constant name=identifier (keyword_const | literal | SPLAT_ON | SPLAT_OFF | SPLAT_ZEROS | SPLAT_BLANKS)? FREE_SEMI) 
@@ -806,6 +806,8 @@ blank_spec:
 
 // -------- interfaces --------  
 piBegin: DS_FIXED ds_name EXTERNAL_DESCRIPTION DATA_STRUCTURE_TYPE DEF_TYPE_PI FROM_POSITION TO_POSITION
+	DATA_TYPE DECIMAL_POSITIONS RESERVED keyword* (EOL|EOF);
+piBeginTrail: DS_FIXED ds_name DEF_TYPE_PI 
 	DATA_TYPE DECIMAL_POSITIONS RESERVED keyword* (EOL|EOF);
 
 parm_fixed: DS_FIXED ds_name EXTERNAL_DESCRIPTION DATA_STRUCTURE_TYPE DEF_TYPE_BLANK FROM_POSITION TO_POSITION
