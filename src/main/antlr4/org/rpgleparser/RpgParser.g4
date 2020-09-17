@@ -1805,7 +1805,7 @@ MatchingRecordIndicator
 hspec_fixed: HS_FIXED 
 	hs_expression*
 	(EOL|EOF);
-hs_expression: (ID (OPEN_PAREN (hs_parm (COLON hs_parm)*)? CLOSE_PAREN)?);
+hs_expression: ID (OPEN_PAREN (hs_parm (COLON hs_parm)*)? CLOSE_PAREN)? EOL?;
 hs_parm: ID | hs_string | symbolicConstants;
 hs_string: StringLiteralStart (StringContent | StringEscapedQuote )* StringLiteralEnd;
 blank_line: BLANK_LINE;
@@ -1957,8 +1957,14 @@ op_exsr: OP_EXSR identifier ;
 op_feod: OP_FEOD cs_operationExtender? identifier ;
 op_for: OP_FOR cs_operationExtender? indexname=expression   //For(E) I
 	(EQUAL startvalue=expression )? // = 1
+	((FREE_BY increment=expression )?    // By 1
+	((FREE_TO | FREE_DOWNTO) limit=expression )?
+	|
+	((FREE_TO | FREE_DOWNTO) limit=expression )?
 	(FREE_BY increment=expression )?    // By 1
-	((FREE_TO | FREE_DOWNTO) limit=expression )?; // TO 10 ;
+	); 
+	
+
 op_force: OP_FORCE identifier ;
 op_if: OP_IF cs_operationExtender? expression ;
 op_in: OP_IN cs_operationExtender? (identifier )? identifier ;
@@ -2176,7 +2182,7 @@ bif_editflt: BIF_EDITFLT OPEN_PAREN numericexpression=expression CLOSE_PAREN;
 bif_editw: BIF_EDITW OPEN_PAREN numeric=expression COLON editword=expression CLOSE_PAREN;
 bif_elem: BIF_ELEM OPEN_PAREN expression CLOSE_PAREN;
 bif_eof: BIF_EOF (OPEN_PAREN (filenameident=identifier)? CLOSE_PAREN)?;
-bif_equal: BIF_EQUAL (OPEN_PAREN filenameident=identifier CLOSE_PAREN)?;
+bif_equal: BIF_EQUAL (OPEN_PAREN (filenameident=identifier)? CLOSE_PAREN)?;
 bif_error: BIF_ERROR (OPEN_PAREN CLOSE_PAREN)?;
 bif_fields: BIF_FIELDS OPEN_PAREN identifier (COLON identifier)* CLOSE_PAREN;
 bif_float: BIF_FLOAT OPEN_PAREN expression CLOSE_PAREN;
